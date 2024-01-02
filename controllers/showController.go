@@ -228,10 +228,8 @@ func StartMessageConsumer() {
             continue
         }
 
-        // Access the ShowId field in the message
         showID := message.ShowId
 
-        // Call the function to update the accepted status of the Show
         updateShowAccepted(showID)
     }
 }
