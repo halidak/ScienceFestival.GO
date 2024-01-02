@@ -251,11 +251,17 @@ func updateShowAccepted(showID string) {
         },
     }
 
-    _, err = showCollection.UpdateOne(context.TODO(), filter, update)
+    updateResult, err := showCollection.UpdateOne(context.TODO(), filter, update)
     if err != nil {
         log.Printf("Could not update show: %v", err)
         return
     }
+
+    if updateResult.MatchedCount == 0 {
+        log.Println("No show found with ID:", showID)
+        return
+    }
+
 
     log.Println("Updated show with ID:", showID)
 }
