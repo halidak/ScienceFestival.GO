@@ -10,6 +10,6 @@ type Show struct {
 	Name        string             `json:"name,omitempty" bson:"name,omitempty"`
 	ReleaseDate time.Time          `json:"releaseDate,omitempty" bson:"release_date,omitempty"`
 	Description string			   `json:"description,omitempty" bson:"description,omitempty"`
-	Performers  []string           `json:"performers,omitempty" bson:"performers,omitempty"`
+	Performer   string           `json:"performer,omitempty" bson:"performer,omitempty"`
 	Accepted    bool               `json:"accepted,omitempty" bson:"accepted,omitempty"`
 }
