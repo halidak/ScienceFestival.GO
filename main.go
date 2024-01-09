@@ -4,11 +4,14 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"siencefestival/api/routers"
 	"siencefestival/api/controllers"
+	"siencefestival/api/routers"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	healthcheck "github.com/tavsec/gin-healthcheck"
+	"github.com/tavsec/gin-healthcheck/checks"
+	"github.com/tavsec/gin-healthcheck/config"
 )
 
 func main() {
@@ -24,6 +27,8 @@ func main() {
 
 	showGroup := r.Group("/show")
 	showGroup.Any("/*path", gin.WrapH(showRouter))
+
+	healthcheck.New(r, config.DefaultConfig(), []checks.Check{})
 
 	go controllers.StartMessageConsumer()
 
