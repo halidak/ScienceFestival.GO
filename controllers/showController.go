@@ -26,7 +26,7 @@ func init() {
 		log.Fatalf("Error loading .env file")
 	}
 
-	connectionString := os.Getenv("CONNECTION_STRING")
+	connectionString := os.Getenv("MONGODB_CONNECTION_STRING")
 	clientOptions := options.Client().ApplyURI(connectionString)
 
 	client, error := mongo.Connect(context.TODO(), clientOptions)
@@ -182,7 +182,8 @@ func GetUnacceptedShows(c *gin.Context) {
 }
 
 func StartMessageConsumer() {
-    conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+    rabbitMqConnectionString := os.Getenv("RABBITMQ_CONNECTION_STRING")
+    conn, err := amqp.Dial(rabbitMqConnectionString)
     if err != nil {
         log.Fatalf("Failed to connect to RabbitMQ: %v", err)
     }
